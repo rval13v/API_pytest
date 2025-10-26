@@ -23,4 +23,15 @@ class TestCreatePlace():
         assert status == 'OK'
         print('Поле Status корректно')
 
+        place_id = check_response_post.get("place_id")
+        #________GET__________________________________
+        print('\nМетод GET')
+        result_get: Response = GoogleMapsApi.get_new_place(place_id)
+
+        print(f'Статус-код: {result_get.status_code}')
+        assert 200 == result_get.status_code
+        print('Стату-код GET корректен')
+
+
+
 
