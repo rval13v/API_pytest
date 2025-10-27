@@ -57,3 +57,27 @@ class TestCreatePlace:
         assert actual_address == "100 Lenina street, RU"
         print('Адрес изменился')
 
+        #____DELETE______________________________________________
+        print('Метод DELETE')
+        result_delete: Response = GoogleMapsApi.delete_new_place(place_id)
+
+        response_json = result_delete.json()
+        print(f"Отправка DELETE-запроса для place_id '{place_id}':")
+        print(f"  Статус-код: {result_delete.status_code}")
+        assert result_delete.status_code == 200
+        print(f"  Статус из ответа: {response_json.get('status')}")
+        assert response_json.get('status') == 'OK'
+        print("  Удаление успешно.")
+
+        print('Метод GET DELETE')
+        result_get: Response = GoogleMapsApi.get_new_place(place_id)
+
+        print(f'Статус-код: {result_get.status_code}')
+        assert result_get.status_code == 404
+        print('Стутс-код корректен, локация удалена')
+
+        check_response_get = result_get.json()
+        msg = check_response_get.get('msg')
+        print(msg)
+        assert msg == "Get operation failed, looks like place_id  doesn't exists"
+        print('Поле MSG корректно')
