@@ -5,9 +5,9 @@ from utils.http_methods import HTTPMethods
 base_url = "https://rahulshettyacademy.com"
 key = "?key=qaclick123"
 
-# Создали класс, поместили туда метод для создания нового места
-class GoogleMapsApi():
 
+# Создали класс, поместили туда метод для создания нового места
+class GoogleMapsApi:
     # Статический метод
     @staticmethod
     def create_new_place():
@@ -39,7 +39,7 @@ class GoogleMapsApi():
     @staticmethod
     def get_new_place(place_id):
         get_resource = "/maps/api/place/get/json"
-        get_url = base_url + get_resource + key + "&place_id" + place_id
+        get_url = base_url + get_resource + key + "&place_id=" + place_id
         print(get_url)
         result_get = HTTPMethods.get(get_url)
         print(result_get.text)

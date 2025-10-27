@@ -2,8 +2,7 @@ from requests import Response
 from utils.api import GoogleMapsApi
 
 
-class TestCreatePlace():
-
+class TestCreatePlace:
     def test_create_new_place(self):
         print('Метод POST')
         result_post: Response = GoogleMapsApi.create_new_place()
@@ -36,7 +35,6 @@ class TestCreatePlace():
         result_put: Response = GoogleMapsApi.put_new_place(place_id)
 
         print(f'Статус-код: {result_put.status_code}')
-        assert 200 == result_put.status_code
         if result_put.status_code == 200:
             print('Стату-код GET PUT корректен')
         elif result_put.status_code == 404:
@@ -55,9 +53,9 @@ class TestCreatePlace():
         assert 200 == result_get_after_put.status_code
         print('Стату-код GET после PUT корректен')
 
-        # check_response_get_after_put = result_get_after_put.json()
-        # actual_address = check_response_get_after_put.get('address')
-        # print(f"Фактический адрес после обновления: {actual_address}")
-        # assert actual_address == "100 Lenina street, RU"
-        # print('Адрес изменился')
+        check_response_get_after_put = result_get_after_put.json()
+        actual_address = check_response_get_after_put.get('address')
+        print(f"Фактический адрес после обновления: {actual_address}")
+        assert actual_address == "100 Lenina street, RU"
+        print('Адрес изменился')
 
