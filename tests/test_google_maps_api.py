@@ -35,10 +35,8 @@ class TestCreatePlace:
         result_put: Response = GoogleMapsApi.put_new_place(place_id)
 
         print(f'Статус-код: {result_put.status_code}')
-        if result_put.status_code == 200:
-            print('Стату-код GET PUT корректен')
-        elif result_put.status_code == 404:
-            print(f'Статус: {result_put.status_code}, Ошибка, локация не найдена')
+        assert 200 == result_put.status_code, f'Статус: {result_put.status_code}, Ошибка, локация не найдена'
+        print('Стату-код GET PUT корректен')
 
         check_response_put = result_put.json()
         msg = check_response_put.get('msg')
